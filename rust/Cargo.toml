@@ -19,7 +19,7 @@ hex = { version = "0.4.3", default-features = false, features = ["alloc"] }
 merkleized-metadata = { git = "https://github.com/Zondax/merkleized-metadata", default-features = false, rev = "cd1363a2c4702abf34fcc461055f0059b3c32bec" }
 neon = "1.0.0"
 parity-scale-codec = { version = "3.6.9", default-features = false }
-scale-info = { version = "2.11.1", default-features = false }
+scale-info = { version = "2.11.3", default-features = false }
 array-bytes = { version = "6.2.3", default-features = false }
 scale-decode = { version = "0.12.0", default-features = false }
 frame-metadata-hash-extension = { git="https://github.com/paritytech/polkadot-sdk.git", branch = "bkchr-metadata-hash"  }
