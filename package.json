@@ -23,6 +23,7 @@
     "@noble/hashes": "1.4.0",
     "@polkadot/api": "10.11.2",
     "@scure/base": "1.1.6",
+    "@subwallet/chain-list": "^0.2.66",
     "body-parser": "^1.20.2",
     "express": "^4.19.2",
     "scale-ts": "1.6.0",

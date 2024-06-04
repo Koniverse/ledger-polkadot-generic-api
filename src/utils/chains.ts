@@ -1,6 +1,6 @@
-import yaml from 'yaml'
-import fs from 'fs'
 import type { MetadataV15 } from '@polkadot/types/interfaces/metadata'
+import { ChainInfoMap } from '@subwallet/chain-list'
+import { _ChainStatus } from '@subwallet/chain-list/types'
 
 import type { ChainProps } from '../types'
 
@@ -15,34 +15,43 @@ export type Chain = {
 
 export type ChainsFile = { chains: Chain[] }
 
-let chainsFile: ChainsFile | undefined
+let chainsFile: ChainsFile | undefined;
+
+const providerMap: Record<string, number> = {
+  default: 0,
+  shiden: 2,
+  crabParachain: 1,
+  shibuya: 1
+}
 
 export const getChains = (): Chain[] => {
   if (chainsFile) {
     return chainsFile.chains
   }
 
-  const fileRead = loadChains('./chains.yaml')
-  chainsFile = fileRead
+  chainsFile = loadChains()
 
-  return chainsFile.chains
+  return chainsFile.chains;
 }
 
-function loadChains(filePath: string) {
-  const file = fs.readFileSync(filePath, 'utf8')
-  const yamlFile = yaml.parse(file)
+function loadChains() {
+  const chains: Chain[] = [];
 
-  if (!yamlFile['chains']) {
-    throw new Error('invalid chains yaml, first field must be "chains"')
-  }
-  if (!(yamlFile['chains'] instanceof Array)) {
-    throw new Error('invalid chains yaml, chains should be array')
-  }
-  if (
-    !yamlFile['chains'].reduce((isValid, chain) => typeof chain == 'object' && !!chain.id && !!chain.name && !!chain.url && isValid, true)
-  ) {
-    throw new Error('invalid chains yaml, chain elements should have id, name and url')
+  for (const info of Object.values(ChainInfoMap)) {
+    if (info.chainStatus === _ChainStatus.ACTIVE && info.substrateInfo) {
+      const providers = Object.values(info.providers);
+      const skip = providers.length === 0 || Object.keys(info.providers).some((name) => name.includes('Fake')); // skip chains without providers or with fake providers
+      if (!skip) {
+        const providerIndex = providerMap[info.slug] ?? providerMap.default;
+        const chain: Chain = {
+          id: info.slug,
+          name: info.name,
+          url: providers[providerIndex]
+        }
+        chains.push(chain)
+      }
+    }
   }
 
-  return yamlFile as ChainsFile
+  return { chains } as ChainsFile
 }

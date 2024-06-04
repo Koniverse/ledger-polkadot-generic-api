@@ -1,3 +1,4 @@
+import { ApiPromise } from '@polkadot/api'
 import { getApi } from './getApi'
 import { Option } from '@polkadot/types'
 import { OpaqueMetadata } from '@polkadot/types/interfaces'
@@ -7,7 +8,15 @@ import { ChainError } from './errors'
 
 export async function cacheMetadata(chain: Chain) {
   const { url } = chain
-  const api = await getApi(url)
+  const api = await new Promise<ApiPromise>((resolve, reject) => {
+    setTimeout(() => {
+      reject(new ChainError('Connection timeout'))
+    }, 60000);
+
+    getApi(url)
+      .then(resolve)
+      .catch(reject)
+  })
 
   if (!chain.metadata || !chain.metadataHex) {
     if (api.runtimeMetadata.version !== 14) {
