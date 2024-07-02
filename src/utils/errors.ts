@@ -9,6 +9,10 @@ export const renderError = (res: Response, httpCode: number, e: unknown) => {
   res.status(httpCode).json({ errorMessage })
 }
 
+export const renderShortenerMetadataError = (res: Response, e: string) => {
+  renderError(res, 500, new Error("failed to generate shortened metadata: [" + e + "]" ))
+}
+
 export const renderInternalError = (res: Response, e: unknown) => {
   const errorMessage = e instanceof ChainError ? e.message : defaultInternalErrorMsg
   renderError(res, 500, new Error(errorMessage))

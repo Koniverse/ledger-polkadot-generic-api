@@ -93,6 +93,31 @@ Detailed Docker commands:
 - **Build Docker Image**: `yarn docker:build`
 - **Run Docker Container**: `yarn docker:run`
 
+## Deploying 
+Sure, here is a revised version of your instructions:
+
+### Obtain the Image
+you can build the image or pull it from the [Zondax Docker Hub](https://hub.docker.com/repository/docker/zondax/ledger-polkadot-generic-api/general).
+
+### Create the File with Supported Chains
+Refer to the `chains.yaml` file in this repository as an example. The file should include:
+- **name**: The name of the chain.
+- **id**: A fixed value used by API clients to select a specific chain from the available options.
+- **url**: The node URL of the chain.
+
+### Run the Docker Image
+You need to take several steps into consideration:
+- Mount the `chains.yaml` file at the `/app` directory. The file path should be `/app/chains.yaml`. 
+- Expose port 3001 to enable the service to function.
+
+As an example, this would be the command to run a new container:
+```bash
+  docker run -p 3001:3001 -v /path/to/your/chains.yaml:/app/chains.yaml zondax/ledger-polkadot-generic-api
+```
+
+## Consuming the API
+You can please review the OpenAPI spec where each available endpoint is described. You can check jest tests as well. 
+
 ## Contributing
 Guidelines for how to contribute to the project. You can detail how to fork the repository, create a new branch, make changes, and pull requests.
 
