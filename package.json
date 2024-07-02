@@ -25,6 +25,7 @@
     "@scure/base": "1.1.6",
     "@subwallet/chain-list": "^0.2.66",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
     "scale-ts": "1.6.0",
     "yaml": "^2.4.1"
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@polkadot/types": "^10.11.2",
     "@types/body-parser": "^1",
+    "@types/cors": "^2",
     "@types/express": "^4",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.16",
