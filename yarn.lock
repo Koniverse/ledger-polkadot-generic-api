@@ -3200,14 +3200,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@subwallet/chain-list@npm:^0.2.66":
-  version: 0.2.66
-  resolution: "@subwallet/chain-list@npm:0.2.66"
+"@subwallet/chain-list@npm:^0.2.71":
+  version: 0.2.71
+  resolution: "@subwallet/chain-list@npm:0.2.71"
   dependencies:
     "@polkadot/dev": "npm:0.67.167"
     "@polkadot/util": "npm:^12.5.1"
     eventemitter3: "npm:^5.0.1"
-  checksum: 10c0/2dc02e33f49036c1ae116a0f95c409b375b1b89e8e9999e8f4943a5498aa2d5b43d0964cc7f2e0ad2d4119c5485e9c685f19c8e3af661f90dc31cbb7222b4df3
+  checksum: 10c0/6560224f76b49f993346785eac0f300581d8aad184a8bfe3a651243649378e286cb3f9b722e6cd7fa615b2d8bee759a6a0cfe204b0e400ecd53cfc6873dfce60
   languageName: node
   linkType: hard
 
@@ -10244,7 +10244,7 @@ __metadata:
     "@polkadot/api": "npm:10.11.2"
     "@polkadot/types": "npm:^10.11.2"
     "@scure/base": "npm:1.1.6"
-    "@subwallet/chain-list": "npm:^0.2.66"
+    "@subwallet/chain-list": "npm:^0.2.71"
     "@types/body-parser": "npm:^1"
     "@types/cors": "npm:^2"
     "@types/express": "npm:^4"
